@@ -1,0 +1,6 @@
+<script type="text/javascript">
+    var testEventSource = new EventSource("http://localhost:8080/locations");
+    testEventSource.onmessage = function (e) {
+        console.log(e);
+    };
+</script>
