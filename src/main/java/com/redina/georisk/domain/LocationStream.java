@@ -10,6 +10,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.core.io.ClassPathResource;
+
 import io.netty.util.internal.ThreadLocalRandom;
 import reactor.core.publisher.Flux;
 
@@ -62,10 +64,15 @@ public class LocationStream {
 	}
 	
 	public static List<RiskLocation> storeAllLocations() {
-		String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
+		ClassPathResource res = new ClassPathResource("Coordinates.csv");    
+		File file = new File(res.getPath());
+		//File file = new File(LocationStream.class.getResource("Coordinates.csv").getFile());
+		//String fileName = "Coordinates.csv";
+		//String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
 		List<RiskLocation> locations=null;
 		try {
-			locations = Files.readAllLines(new File(fileName)
+			locations = Files.readAllLines(file
+					//new File(fileName)
 				.toPath())
 				.stream()
 				.skip(1)
