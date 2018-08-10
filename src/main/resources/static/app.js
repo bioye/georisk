@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     function createEventSource() {
-        var eventSource = new EventSource("http://localhost:8080/locations");
+        var eventSource = new EventSource("locations");
         var myStyle = {
             "color": "#ff7800",
             "weight": 5,
