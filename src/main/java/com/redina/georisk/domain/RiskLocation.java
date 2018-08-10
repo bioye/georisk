@@ -69,7 +69,6 @@ public class RiskLocation {
 	public RiskLocation(float longi, float lati) {
 		this.longi = longi;
 		this.lati = lati;
-		//this.risk  = ThreadLocalRandom.current().nextInt(10)+1;
 		this.risk  = ThreadLocalRandom.current().nextInt(4)+1;
 	}
 	
@@ -78,7 +77,6 @@ public class RiskLocation {
 
 	private static RiskLocation onlyLocation = new RiskLocation();
 	private int risk;
-	//private String riskColour;
 	
 	//consider Enum
 	private float longi;

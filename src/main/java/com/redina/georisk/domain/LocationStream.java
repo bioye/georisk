@@ -99,77 +99,7 @@ public class LocationStream {
 					.map(line->line.split(","))
 					.filter(a->a.length==2)
 					.map(a->RiskLocation.getSingleton(a[0], a[1]));
-			//stream.forEach(System.out::println);			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return stream;
-	}
-	
-	public static Stream<RiskLocation> getLocationsWhile() {
-		String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
-		Stream<RiskLocation> stream=null;
-		boolean k=true;
-		while(k) {
-		try {			
-			stream=Files.lines(Paths.get(fileName))
-					.skip(1)
-					.map(line->line.split(","))
-					.filter(a->a.length==2)
-					.map(a->RiskLocation.getSingleton(a[0], a[1]));
-			final AtomicInteger indexHolder = new AtomicInteger();
-			stream.forEach(element->System.out.println(indexHolder.getAndIncrement()+" - "+ element));
-			k=true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
-		return stream;
-	}
-	
-	public static Stream<RiskLocation> getLocations2() {
-		String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
-		Stream<RiskLocation> stream=null;
-		//boolean k=true;
-		//while(k) {
-		try {
-			//System.out.format("Lines in file = %,d", Files.readAllLines(new File(fileName).toPath()).size());
-			
-			stream=Files.lines(Paths.get(fileName))
-					.skip(1)
-					.map(line->line.split(","))
-					.filter(a->a.length==2)
-					.map(a->RiskLocation.getSingleton(a[0], a[1]));
-			final AtomicInteger indexHolder = new AtomicInteger();
-			stream.forEach(element->System.out.println(indexHolder.getAndIncrement()+" - "+ element));
-			//k=true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		//}
-		}
-		return stream;
-	}
-	
-	public static Stream<String[]> getLocations3() {
-		String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
-		Stream<String[]> stream=null;
-		try {
-			//System.out.format("Lines in file = %,d", Files.readAllLines(new File(fileName).toPath()).size());
-			
-			stream=Files.lines(Paths.get(fileName))
-					.skip(1)
-					.map(line->line.trim())
-					.filter(line->!line.isEmpty())
-					.map(line->line.split(","))
-					.filter(a->a.length!=2);
-			final AtomicInteger indexHolder = new AtomicInteger();
-			//todo print arrays nicely not cryptic
-			stream.forEach(element->System.out.println(indexHolder.getAndIncrement()+" - "+ element.length));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return stream;
