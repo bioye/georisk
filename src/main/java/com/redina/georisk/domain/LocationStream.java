@@ -64,10 +64,6 @@ public class LocationStream {
 	}
 	
 	public static List<RiskLocation> storeAllLocations() {
-		//ClassPathResource res = new ClassPathResource("Coordinates.csv");    
-		//File file = new File(res.getPath());
-		//File file = new File(LocationStream.class.getResource("Coordinates.csv").getFile());
-		//String fileName = "Coordinates.csv";
 		//String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
 		List<RiskLocation> locations=null;
 		try {
