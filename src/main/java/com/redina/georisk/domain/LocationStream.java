@@ -1,7 +1,10 @@
 package com.redina.georisk.domain;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -64,14 +67,15 @@ public class LocationStream {
 	}
 	
 	public static List<RiskLocation> storeAllLocations() {
-		//String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
 		List<RiskLocation> locations=null;
 		try {
-			File file = new ClassPathResource("Coordinates.csv").getFile();
-			locations = Files.readAllLines(file
+			//File file = new ClassPathResource("Coordinates.csv").getFile();
+			InputStream fileStream = new ClassPathResource("Coordinates.csv").getInputStream();
+			locations=new BufferedReader(new InputStreamReader(fileStream)).lines()
+			//locations = Files.readAllLines(file
 					//new File(fileName)
-				.toPath())
-				.stream()
+				//.toPath())
+				//.stream()
 				.skip(1)
 				.map(line->line.split(","))
 				.filter(a->a.length==2)
