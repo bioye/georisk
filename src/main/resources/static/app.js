@@ -1,6 +1,12 @@
 $(document).ready(function () {
 
     function createEventSource() {
+        /*var eventSource;
+        if (!!window.EventSource) {
+        	eventSource = new EventSource('locations');
+        } else {
+            print("YOUR BROWSER DOES NOT SUPPORT SSE");
+        }*/
         var eventSource = new EventSource("locations");
         var myStyle = {
             "color": "#ff7800",
