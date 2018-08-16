@@ -21,10 +21,7 @@ import reactor.core.publisher.Flux;
 public class LocationStream {
 	
 	public static void main(String[]args) {
-		//List<RiskLocation> generatedLocations = getInfiniteStream().limit(1000000).collect(Collectors.toList());
-		//final AtomicInteger indexHolder = new AtomicInteger();
-		//getInfiniteStream().forEach(element->System.out.println(indexHolder.getAndIncrement()+" - "+ element));
-		System.out.println(getRandomLocationJson());
+		//System.out.println(getRandomLocationJson());
 	}
 	
 	public static Flux<String> getInfiniteJsonFlux() {
@@ -69,13 +66,8 @@ public class LocationStream {
 	public static List<RiskLocation> storeAllLocations() {
 		List<RiskLocation> locations=null;
 		try {
-			//File file = new ClassPathResource("Coordinates.csv").getFile();
 			InputStream fileStream = new ClassPathResource("Coordinates.csv").getInputStream();
 			locations=new BufferedReader(new InputStreamReader(fileStream)).lines()
-			//locations = Files.readAllLines(file
-					//new File(fileName)
-				//.toPath())
-				//.stream()
 				.skip(1)
 				.map(line->line.split(","))
 				.filter(a->a.length==2)
@@ -92,7 +84,7 @@ public class LocationStream {
 	 * Generates a stream from  CSV and ends at EOF.  Only one line loaded into memory at each moment.
 	 */
 	public static Stream<RiskLocation> getLocations() {
-		String fileName = "C:\\Users\\Abioye\\Downloads\\Coordinates.csv";
+		String fileName = "Coordinates.csv";
 		Stream<RiskLocation> stream=null;
 		try {
 			stream=Files.lines(Paths.get(fileName))

@@ -28,7 +28,7 @@ $(document).ready(function () {
             }
             var circle = L.circle([body.longi, body.lati], {
                 color: riskColor,
-                fillColor: '#f03',
+                fillColor: riskColor,
                 fillOpacity: 0.5,
                 radius: 500
             }).addTo(mymap);
