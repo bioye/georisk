@@ -23,7 +23,7 @@ $(document).ready(function () {
             	riskColor = 'orange';
             	break;
             case 4:
-            	riskColor = 'yellow';
+            	riskColor = 'yellow';//
             	break;
             }
             var circle = L.circle([body.longi, body.lati], {
