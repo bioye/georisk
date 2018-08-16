@@ -30,7 +30,7 @@ $(document).ready(function () {
                 color: riskColor,
                 fillColor: riskColor,
                 fillOpacity: 0.5,
-                radius: 500
+                radius: 100
             }).addTo(mymap);
         }, false);
         return eventSource;
