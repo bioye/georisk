@@ -20,16 +20,59 @@ import reactor.core.publisher.Flux;
 
 public class LocationStream {
 	
+	public static Flux<RiskLocation> getInfiniteFluxFast() {
+		List<RiskLocation> locations = getRiskLocations();
+		return Flux.fromStream(getInfiniteStream(locations));
+	}
+	
+	/*
+	 * Generates infinite stream from CSV. Loads entire content into memory (list) first.
+	 */
+	public static Stream<RiskLocation> getInfiniteStream(List<RiskLocation> locations){		
+		Supplier<RiskLocation> randomSupplier = () -> {
+			return getRandomLocation(locations);
+		};		
+		return Stream.generate(randomSupplier);	
+	}
+	
+	public static RiskLocation getRandomLocation(List<RiskLocation> locations) {
+		int index = ThreadLocalRandom.current().nextInt(locations.size());
+		return locations.get(index);
+	}
+	//
+	//
+	
+	public static Flux<RiskLocation> getInfiniteFlux() {
+		return Flux.fromStream(getInfiniteStream());
+	}
+	
+	/*
+	 * Generates infinite stream from CSV. Loads entire content into memory (list) first.
+	 */
+	public static Stream<RiskLocation> getInfiniteStream(){
+		Supplier<RiskLocation> randomSupplier = LocationStream::getRandomLocation;
+		return Stream.generate(randomSupplier);	
+	}
+	
+	public static RiskLocation getRandomLocation() {
+		List<RiskLocation> locations = getRiskLocations();
+		int index = ThreadLocalRandom.current().nextInt(locations.size());
+		return locations.get(index);
+	}
+
+	public static List<RiskLocation> getRiskLocations() {
+		if(riskLocations==null) riskLocations=storeAllLocations();
+		return riskLocations;
+	}
+	//
+	//
+	
 	public static void main(String[]args) {
 		//System.out.println(getRandomLocationJson());
 	}
 	
 	public static Flux<String> getInfiniteJsonFlux() {
 		return Flux.fromStream(getInfiniteJsonStream());
-	}
-	
-	public static Flux<RiskLocation> getInfiniteFlux() {
-		return Flux.fromStream(getInfiniteStream());
 	}
 	
 	/*
@@ -41,26 +84,12 @@ public class LocationStream {
 	}
 	
 	/*
-	 * Generates infinite stream from CSV. Loads entire content into memory (list) first.
-	 */
-	public static Stream<RiskLocation> getInfiniteStream(){
-		Supplier<RiskLocation> randomSupplier = LocationStream::getRandomLocation;
-		return Stream.generate(randomSupplier);	
-	}
-	
-	/*
 	 * Return RiskLocation as GeoJson point in String form
 	 */
 	public static String getRandomLocationJson() {
 		List<RiskLocation> locations = getRiskLocations();
 		int index = ThreadLocalRandom.current().nextInt(locations.size());
 		return locations.get(index).getJsonPoint();
-	}
-	
-	public static RiskLocation getRandomLocation() {
-		List<RiskLocation> locations = getRiskLocations();
-		int index = ThreadLocalRandom.current().nextInt(locations.size());
-		return locations.get(index);
 	}
 	
 	public static List<RiskLocation> storeAllLocations() {
@@ -99,9 +128,4 @@ public class LocationStream {
 	}
 	
 	private static List<RiskLocation> riskLocations=null;
-
-	public static List<RiskLocation> getRiskLocations() {
-		if(riskLocations==null) riskLocations=storeAllLocations();
-		return riskLocations;
-	}
 }
