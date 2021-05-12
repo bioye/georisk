@@ -38,7 +38,7 @@ $(document).ready(function () {
                 fillOpacity: 0.5,
                 radius: 100
             }).addTo(mymap);
-        }, {passive: false});
+        }, {passive: true});
         return eventSource;
     }
 
