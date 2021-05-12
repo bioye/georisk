@@ -11,12 +11,6 @@ import reactor.core.publisher.Flux;
 
 @RestController
 public class LocationController {
-	
-	/*@GetMapping("/limited")
-	public Flux<RiskLocation> getLimitedLocations(){
-		return null;
-	}*/
-
 	//@GetMapping(value = "/locations", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	@GetMapping("/locations")
 	public Flux<RiskLocation> getUnlimitedLocations(){
@@ -27,5 +21,4 @@ public class LocationController {
 	public Flux<String> getUnlimitedJsonLocations(){
 		return LocationStream.getInfiniteJsonFlux();
 	}
-
 }
